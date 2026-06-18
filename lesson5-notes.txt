@@ -1,0 +1,25 @@
+# Lesson 5: Linux Permissions
+
+## Permission String Format
+d rwx r-x r--
+│  │   │   └── Others
+│  │   └─────── Group  
+│  └──────────── Owner
+└──────────────── Type (d=directory, -=file)
+
+## Permission Values (Numeric/Octal)
+r = 4, w = 2, x = 1
+
+Common permission sets:
+777 = rwxrwxrwx = everyone has full access = DANGEROUS
+755 = rwxr-xr-x = owner full, others read/execute
+644 = rw-r--r-- = owner read/write, others read only
+600 = rw------- = owner read/write only = private files (SSH keys)
+
+## Security Rule
+Principle of Least Privilege: every user and process should have 
+the minimum permissions needed to do their job — nothing more.
+
+## Red Flags
+-rwxrwxrwx = world-writable = anyone can modify or execute
+chmod 777 on config files = credentials exposed, server hijack possible
