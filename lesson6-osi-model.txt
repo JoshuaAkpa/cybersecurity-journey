@@ -1,0 +1,28 @@
+# Phase 1, Lesson 1: OSI Model
+
+## The 7 Layers (top to bottom)
+7. Application  - user-facing software (HTTP, browsers)
+6. Presentation  - formatting/encryption (TLS/SSL)
+5. Session       - connection management
+4. Transport     - segments, ports, reliable delivery (TCP/UDP)
+3. Network       - IP addressing, routing between networks
+2. Data Link     - MAC addressing, local network delivery
+1. Physical      - cables, radio signals, actual bits
+
+Mnemonic: All People Seem To Need Data Processing
+
+## IP vs MAC
+IP address  = final destination, stays constant across the journey
+MAC address = next physical hop, changes at every router
+
+## curl -v https://google.com mapped to OSI layers
+Layer 3/4: Trying 172.217.22.14:443 (IP + port)
+Layer 6:   TLS handshake, certificate verification
+Layer 7:   GET / HTTP/2, Host: google.com, HTTP/2 301 response
+
+## Security Insight
+A Layer 4 firewall sees only IP + port - no visibility into request content.
+A Layer 7 / "next-gen" firewall must decrypt TLS traffic to inspect 
+application-layer content (e.g. specific HTTP requests) - this is called 
+TLS inspection / SSL termination. Foundation for Zero Trust architecture 
+(Phase 5).
