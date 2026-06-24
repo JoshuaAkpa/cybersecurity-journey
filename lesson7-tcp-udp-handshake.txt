@@ -1,0 +1,40 @@
+# Phase 1, Lesson 2: TCP vs UDP and the Three-Way Handshake
+
+## TCP vs UDP
+TCP = reliable, ordered, connection-based (web, file transfer, email)
+UDP = fast, connectionless, no guarantees (DNS, video calls, gaming)
+
+## TCP Three-Way Handshake
+Step 1: Client sends SYN  ("I want to connect, here is my sequence number")
+Step 2: Server sends SYN-ACK ("Acknowledged, here is my sequence number")
+Step 3: Client sends ACK ("Connection established")
+Data only flows AFTER all three steps complete.
+
+## Ports
+IP address = the building (identifies the device)
+Port       = the office door (identifies the application)
+0-65535 possible ports
+Common: 80=HTTP, 443=HTTPS, 22=SSH, 53=DNS
+
+## Port States (Nmap)
+Open     = application actively listening
+Closed   = OS responded, nothing listening
+Filtered = no response, firewall dropping packets silently
+
+## DNS uses UDP because:
+- Queries are tiny (tens to hundreds of bytes)
+- One-shot request/response, no ongoing connection needed
+- Speed is critical (every webpage load depends on DNS)
+- Reliability handled at application level (client retries)
+- Exception: TCP used for zone transfers and large responses
+
+## DNS Zone Transfer Attack (preview - Phase 4)
+Misconfigured DNS servers allow any IP to request a full zone transfer
+= complete dump of all hostnames and IPs in a domain
+= instant infrastructure map of a target organization
+
+## Security Insight
+UDP raw packet crafting requires root privileges.
+Penetration testers operate from root environments (Kali Linux)
+or from machines where privilege escalation has been achieved.
+This is why privilege escalation is a core offensive security skill.
