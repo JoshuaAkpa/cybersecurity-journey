@@ -1,0 +1,35 @@
+# Port Analysis Exercise — Penetration Tester Reasoning
+
+## Target Port Profile
+Port 22  (SSH)   - open
+Port 80  (HTTP)  - open
+Port 443 (HTTPS) - closed
+Port 3306 (MySQL) - open
+
+## Assessment
+Likely LAMP stack: Linux + Apache/Nginx + MySQL + PHP
+Web server serving HTTP with backend database
+SSH indicates Linux OS with remote admin access
+
+## Critical Finding: Port 3306 Exposed
+MySQL should NEVER be publicly accessible
+Should only be reachable on localhost or private network
+Public exposure = direct database attack surface
+
+## Security Implications
+- Credential brute force possible (root:root, admin:admin)
+- Direct MySQL vulnerability exploitation
+- Data exposure (user records, password hashes)
+- Single misconfiguration signals poor overall security posture
+
+## Attack Chain (if authorized)
+1. Service fingerprint exact versions
+2. Test web app (port 80) for SQL injection
+3. Extract DB credentials via SQLi
+4. Access MySQL directly (port 3306)
+5. Reuse credentials for SSH (port 22)
+6. Gain shell access = full compromise
+
+## Key Concept: Security Posture Inference
+One misconfiguration raises probability of others existing.
+"Pull the thread" — one loose end often unravels everything.
